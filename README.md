@@ -1,221 +1,54 @@
-# AutoAnalyze 🚀
-### AI-Powered Automated Data Analysis & Predictive Intelligence Platform
+# AutoAnalyze Lite
 
-AutoAnalyze is an end-to-end analytics platform that automates the complete data analysis workflow. Users can upload structured datasets (CSV/Excel), perform automated data cleaning, exploratory data analysis, interactive visualization, machine learning, predictive analytics, and generate actionable business insights—all through a modern web interface.
+Automated Exploratory Data Analysis for CSV files — no code required.
 
----
+Upload a CSV and instantly get a dataset overview, a data-quality report
+(missing values, duplicates, outliers), statistical summaries, interactive
+visualizations, and a downloadable HTML report with a plain-English summary
+generated from the computed statistics (never invented numbers).
 
-## ✨ Features
+## Features
 
-- 📂 Upload CSV & Excel datasets
-- 🧹 Automated data cleaning
-- 📊 Exploratory Data Analysis (EDA)
-- 📈 Interactive visualizations
-- 📉 KPI Dashboard
-- 🤖 Machine Learning (Regression & Classification)
-- 🔮 Predictive Analytics
-- 💡 AI-generated business insights
-- 📄 Report generation
-- ☁️ Cloud deployment
+- **Overview** — row/column counts, dtypes, memory usage, preview, statistical summary
+- **Data Quality** — missing values, duplicate rows, IQR-based outlier detection, constant/high-cardinality columns, cleaned-CSV download
+- **Explore** — per-column distribution analysis, correlation heatmap, top correlated pairs, category breakdowns
+- **Export** — downloadable self-contained HTML report
 
----
+## Setup
 
-# 🛣️ Development Roadmap
-
-## Phase 1 — Foundation
-
-- [ ] Initialize GitHub repository
-- [ ] Set up React + TypeScript frontend
-- [ ] Set up FastAPI backend
-- [ ] Configure project structure
-- [ ] Connect frontend with backend
-- [ ] Deploy initial application
-
----
-
-## Phase 2 — Data Upload
-
-- [ ] Upload CSV files
-- [ ] Upload Excel files
-- [ ] Dataset validation
-- [ ] Dataset preview
-- [ ] Dataset metadata
-- [ ] Error handling
-
----
-
-## Phase 3 — Data Profiling
-
-- [ ] Column detection
-- [ ] Data type inference
-- [ ] Missing value analysis
-- [ ] Duplicate detection
-- [ ] Outlier detection
-- [ ] Statistical summary
-- [ ] Dataset health score
-
----
-
-## Phase 4 — Automated Data Cleaning
-
-- [ ] Remove duplicates
-- [ ] Handle missing values
-- [ ] Encode categorical features
-- [ ] Scale numerical features
-- [ ] Date parsing
-- [ ] Export cleaned dataset
-
----
-
-## Phase 5 — Exploratory Data Analysis
-
-- [ ] Correlation Matrix
-- [ ] Histograms
-- [ ] Box Plots
-- [ ] Scatter Plots
-- [ ] Pie Charts
-- [ ] Bar Charts
-- [ ] Line Charts
-- [ ] Distribution Analysis
-- [ ] Pairwise Relationships
-
----
-
-## Phase 6 — Dashboard
-
-- [ ] KPI Cards
-- [ ] Interactive Filters
-- [ ] Dynamic Charts
-- [ ] Responsive Layout
-- [ ] Dark Mode
-- [ ] Dashboard Export
-
----
-
-## Phase 7 — Machine Learning
-
-### Regression
-
-- [ ] Linear Regression
-- [ ] Random Forest
-- [ ] Gradient Boosting
-- [ ] XGBoost
-
-### Classification
-
-- [ ] Logistic Regression
-- [ ] Decision Tree
-- [ ] Random Forest
-- [ ] Support Vector Machine
-
-### Evaluation
-
-- [ ] Train/Test Split
-- [ ] Cross Validation
-- [ ] Model Comparison
-- [ ] Feature Importance
-- [ ] Performance Metrics
-
----
-
-## Phase 8 — Predictive Analytics
-
-- [ ] Forecast future values
-- [ ] Prediction visualizations
-- [ ] Confidence intervals
-- [ ] Model recommendations
-
----
-
-## Phase 9 — AI Insights
-
-- [ ] Automatic insight generation
-- [ ] Trend detection
-- [ ] Anomaly detection
-- [ ] Natural language summaries
-- [ ] Business recommendations
-
----
-
-## Phase 10 — Reports
-
-- [ ] PDF Report
-- [ ] CSV Export
-- [ ] Dashboard Snapshot
-- [ ] Shareable Reports
-
----
-
-## Phase 11 — Deployment
-
-- [ ] Deploy backend
-- [ ] Deploy frontend
-- [ ] Connect production database
-- [ ] Optimize performance
-- [ ] Monitoring & logging
-
----
-
-## 🛠️ Tech Stack
-
-### Frontend
-
-- React
-- TypeScript
-- Tailwind CSS
-- React Router
-- Recharts / Plotly
-
-### Backend
-
-- FastAPI
-- Python
-
-### Data Science
-
-- Pandas
-- NumPy
-- Scikit-learn
-- XGBoost
-- Matplotlib
-- Plotly
-
-### Deployment
-
-- Vercel
-- Railway / Render
-
----
-
-## 📁 Project Structure
-
-```
-AutoAnalyze/
-│
-├── frontend/
-├── backend/
-├── datasets/
-├── notebooks/
-├── docs/
-├── screenshots/
-├── tests/
-└── README.md
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
 ```
 
----
+## Run
 
-## 🎯 Project Goals
+```bash
+streamlit run streamlit_app.py
+```
 
-- Build a production-ready analytics platform
-- Automate repetitive data analysis tasks
-- Provide interactive business intelligence dashboards
-- Support predictive machine learning workflows
-- Deliver actionable insights from structured datasets
+Then open the URL Streamlit prints (default `http://localhost:8501`) and upload a CSV.
 
----
+## Tests
 
-## 📌 Current Status
+```bash
+pytest -q
+```
 
-🚧 Under Development
+## Project structure
 
-This project is actively being developed following the roadmap above.
+```
+app/
+  analysis.py   # core, UI-independent analysis functions
+  insights.py   # plain-English summary built only from computed stats
+  report.py     # self-contained HTML report builder
+streamlit_app.py  # Streamlit UI
+tests/            # pytest unit tests for app/
+```
+
+## Roadmap
+
+- Phase 1 (done): working prototype — upload, overview, quality, charts
+- Phase 2 (done): error handling, tests, CI, cleaned-dataset export, report export
+- Phase 3: optional LLM-backed narrative summary (current summary is template-based from real statistics, with no causal claims)

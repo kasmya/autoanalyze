@@ -29,7 +29,7 @@ def build_html_report(
 <html>
 <head>
 <meta charset="utf-8">
-<title>AutoAnalyze Lite Report — {html.escape(filename)}</title>
+<title>AutoAnalyze Report — {html.escape(filename)}</title>
 <style>
 body {{ font-family: -apple-system, Segoe UI, Helvetica, Arial, sans-serif; margin: 40px; color: #1a1a1a; }}
 h1 {{ font-size: 22px; }}
@@ -44,7 +44,7 @@ ul {{ line-height: 1.6; }}
 </style>
 </head>
 <body>
-<h1>AutoAnalyze Lite — Automated Analysis Report</h1>
+<h1>AutoAnalyze — Automated Analysis Report</h1>
 <div class="meta">File: {html.escape(filename)} &middot; Generated: {generated}</div>
 
 <h2>Overview</h2>

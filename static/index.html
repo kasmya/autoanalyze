@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AutoAnalyze</title>
+<link rel="stylesheet" href="css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js"></script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">📊 AutoAnalyze</div>
+  <div class="topbar-actions" id="topbarActions" hidden>
+    <span id="fileLabel" class="file-label"></span>
+    <button id="newDatasetBtn" class="btn btn-ghost">Analyze another dataset</button>
+  </div>
+</header>
+
+<main>
+
+  <!-- Screen 1: Upload -->
+  <section id="screenUpload" class="screen">
+    <div class="upload-card">
+      <h1>Upload a CSV file</h1>
+      <p class="muted">Get an automatic data-quality report, statistics and interactive charts — no code required.</p>
+
+      <div id="dropzone" class="dropzone">
+        <input type="file" id="fileInput" accept=".csv" hidden>
+        <div class="dropzone-content">
+          <div class="dropzone-icon">⬆️</div>
+          <p><strong>Drag and drop</strong> a CSV file here</p>
+          <p class="muted">or</p>
+          <button id="browseBtn" class="btn btn-primary">Browse files</button>
+        </div>
+      </div>
+
+      <div id="fileInfo" class="file-info" hidden></div>
+      <div id="uploadError" class="error-banner" hidden></div>
+      <div id="uploadSpinner" class="spinner-row" hidden><div class="spinner"></div> Analyzing dataset…</div>
+    </div>
+  </section>
+
+  <!-- Screen 2: Dashboard -->
+  <section id="screenDashboard" class="screen" hidden>
+    <nav class="tabs">
+      <button class="tab-btn active" data-tab="overview">Overview</button>
+      <button class="tab-btn" data-tab="quality">Data Quality</button>
+      <button class="tab-btn" data-tab="explore">Explore</button>
+      <button class="tab-btn" data-tab="export">Export</button>
+    </nav>
+
+    <div id="tabOverview" class="tab-panel">
+      <div class="metric-row" id="overviewMetrics"></div>
+
+      <h2>Plain-English summary</h2>
+      <ul id="summaryList" class="summary-list"></ul>
+
+      <h2>Dataset preview</h2>
+      <div class="table-wrap"><table id="previewTable"></table></div>
+
+      <h2>Column types</h2>
+      <div class="table-wrap"><table id="dtypesTable"></table></div>
+
+      <h2>Statistical summary (numeric columns)</h2>
+      <div class="table-wrap"><table id="numericSummaryTable"></table></div>
+    </div>
+
+    <div id="tabQuality" class="tab-panel" hidden>
+      <h2>Missing values</h2>
+      <div id="missingChart" class="chart"></div>
+      <div class="table-wrap"><table id="missingTable"></table></div>
+
+      <h2>Duplicates</h2>
+      <p id="duplicatesSummary"></p>
+
+      <h2>Potential outliers (IQR method)</h2>
+      <div class="table-wrap"><table id="outliersTable"></table></div>
+
+      <div id="constantColsBlock" hidden>
+        <h2>Constant columns (no information)</h2>
+        <p id="constantColsList"></p>
+      </div>
+
+      <div id="highCardBlock" hidden>
+        <h2>High-cardinality columns (likely IDs)</h2>
+        <p id="highCardList"></p>
+      </div>
+
+      <h2>Clean this dataset</h2>
+      <div class="clean-controls">
+        <label><input type="checkbox" id="dropDuplicatesCheck"> Drop duplicate rows</label>
+        <label><input type="checkbox" id="dropConstantCheck"> Drop constant columns</label>
+        <button id="downloadCleanedBtn" class="btn btn-primary">Download cleaned CSV</button>
+      </div>
+    </div>
+
+    <div id="tabExplore" class="tab-panel" hidden>
+      <h2>Column analysis</h2>
+      <select id="columnSelect"></select>
+      <div class="metric-row" id="columnMetrics"></div>
+      <div id="columnChart" class="chart"></div>
+      <div class="table-wrap"><table id="columnTopValuesTable"></table></div>
+
+      <div id="correlationBlock" hidden>
+        <h2>Correlation heatmap</h2>
+        <div id="correlationChart" class="chart"></div>
+        <h2>Strongest relationships</h2>
+        <div class="table-wrap"><table id="topPairsTable"></table></div>
+      </div>
+    </div>
+
+    <div id="tabExport" class="tab-panel" hidden>
+      <h2>Export analysis</h2>
+      <p class="muted">Download a self-contained HTML report with the full analysis and plain-English summary.</p>
+      <button id="downloadReportBtn" class="btn btn-primary">Download HTML report</button>
+    </div>
+  </section>
+
+</main>
+
+<script src="js/app.js"></script>
+</body>
+</html>

@@ -3,9 +3,9 @@
   "configurations": [
     {
       "name": "autoanalyze",
-      "runtimeExecutable": ".venv/bin/streamlit",
-      "runtimeArgs": ["run", "streamlit_app.py", "--server.headless", "true"],
-      "port": 8501
+      "runtimeExecutable": ".venv/bin/uvicorn",
+      "runtimeArgs": ["backend.main:app", "--host", "0.0.0.0", "--port", "8000"],
+      "port": 8000
     }
   ]
 }

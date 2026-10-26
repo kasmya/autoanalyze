@@ -1,7 +1,7 @@
-"""Core, UI-independent analysis functions for AutoAnalyze Lite.
+"""Core, UI-independent analysis functions for AutoAnalyze.
 
-Kept separate from the Streamlit app so they can be unit tested without
-spinning up a UI.
+Kept separate from the web layer so they can be unit tested without
+spinning up the API or frontend.
 """
 from __future__ import annotations
 
@@ -212,6 +212,15 @@ def profile_column(df: pd.DataFrame, column: str) -> ColumnProfile:
         stats=stats,
         top_values=top_values,
     )
+
+
+def get_histogram(df: pd.DataFrame, column: str, bins: int = 20) -> dict[str, list]:
+    """Pre-bin a numeric column server-side for lightweight chart payloads."""
+    series = df[column].dropna()
+    if series.empty:
+        return {"counts": [], "bin_edges": []}
+    counts, edges = np.histogram(series, bins=bins)
+    return {"counts": counts.tolist(), "bin_edges": [round(float(e), 4) for e in edges]}
 
 
 def clean_dataset(
